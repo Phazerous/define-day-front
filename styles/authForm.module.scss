@@ -1,0 +1,78 @@
+@import '//styles/base';
+
+$base-color: rgb(70, 116, 234, 0.71);
+
+.auth {
+  margin: 5% auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+
+    input {
+      border: 1px solid black;
+      padding: 15px 0px;
+      padding-left: 20px;
+      border-radius: 15px;
+      outline: none;
+      font-size: 20px;
+    }
+
+    button {
+      border-radius: 15px;
+      background-color: $base-color;
+      border: none;
+      color: #fff;
+      padding: 15px 0px;
+      font-size: 25px;
+      width: 100%;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background-color:rgb(70, 116, 234, 0.9);
+      transition: all 0.2s;
+    }
+  }
+
+  max-width: 400px;
+  min-width: 300px;
+}
+
+.alternative {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+  }
+}
+
+.redirect {
+  text-decoration: underline;
+  color: $base-color;
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.redirect:hover {
+  color:rgb(70, 116, 234, 0.9);
+  transition: color 0.2s;
+}
