@@ -1,0 +1,35 @@
+@import '//base';
+
+.nav {
+  ul {
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+  }
+
+  margin-right: 2%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.email {
+  font-size: 22px;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(0, 0, 0, 0.7);
+}
+
+.logout a {
+  font-size: 22px;
+  text-decoration: underline;
+  color: black;
+}
+
+.logout:active a {
+  color: black;
+}
+
+.logout:visited a {
+  color: black;
+}

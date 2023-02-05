@@ -18,4 +18,20 @@ async function post(path: string, body: Record<string, string>) {
   }
 }
 
-export default post;
+async function get(path: string) {
+  const response = await fetch(path, {
+    method: 'GET',
+    credentials: 'include',
+  });
+
+  console.log(response);
+
+  if (!response.ok) {
+    throw response;
+  }
+}
+
+export default {
+  post,
+  get,
+};
