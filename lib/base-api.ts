@@ -8,8 +8,11 @@ async function post(path: string, body: Record<string, string>) {
     body: JSON.stringify(body),
   });
 
-  if (response.status === 200) {
+  console.log(response.status);
+
+  if (response.status === 200 || response.status == 201) {
     const data = await response.json();
+    console.log(data);
     return data;
   }
 

@@ -2,16 +2,28 @@ import { GetServerSidePropsContext } from 'next';
 import Router from 'next/router';
 import styles from '../styles/home.module.scss';
 import authApi from '../lib/authApi';
+import { useState } from 'react';
+import { createWord } from '../lib/wordApi';
 
 interface homeProps {
   email?: string;
 }
 
 export default function HomePage({ email }: homeProps) {
+  const [word, setWord] = useState('');
+
   const onLogOut = async () => {
     try {
       await authApi.logoutUser();
       Router.push('login');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onWordCreate = async () => {
+    try {
+      await createWord(word);
     } catch (e) {
       console.log(e);
     }
@@ -33,6 +45,15 @@ export default function HomePage({ email }: homeProps) {
       </nav>
 
       <h1>Welcome to homepage!</h1>
+
+      <input
+        type='text'
+        value={word}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setWord(e.target.value)
+        }
+      />
+      <button onClick={onWordCreate}>Create!</button>
     </>
   );
 }
