@@ -54,26 +54,28 @@ export default function HomePage({ email }: homeProps) {
         }
       />
       <button onClick={onWordCreate}>Create!</button>
+
+      <FullWordTable />
     </>
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const cookie = 'token=' + context.req.cookies['token'];
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//   const cookie = 'token=' + context.req.cookies['token'];
 
-  const response = await fetch('http://localhost:3000/auth/home', {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      cookie: cookie,
-    },
-  });
+//   const response = await fetch('http://localhost:3000/auth/home', {
+//     method: 'GET',
+//     credentials: 'include',
+//     headers: {
+//       cookie: cookie,
+//     },
+//   });
 
-  if (!response.ok) return { props: {} };
+//   if (!response.ok) return { props: {} };
 
-  const data = await response.json();
+//   const data = await response.json();
 
-  const { email } = data;
+//   const { email } = data;
 
-  return { props: { email } };
-}
+//   return { props: { email } };
+// }

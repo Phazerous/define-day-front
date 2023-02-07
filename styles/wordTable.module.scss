@@ -1,0 +1,96 @@
+// @import '//base';
+
+$border-color: rgb(135, 135, 135, 0.5);
+
+.sidebar {
+  border: 1px solid $border-color;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  padding: 15px 50px;
+
+  font-family: 'Montserrat', sans-serif;
+
+  h3 {
+    align-self: center;
+    font-size: 40px;
+  }
+
+  ol {
+    list-style-position: inside;
+
+    li {
+      font-size: 20px;
+      margin-bottom: 20px;
+      line-height: 25px;
+    }
+
+    li::marker {
+      font-family: 'Montserrat', sans-serif;
+    }
+  }
+
+  width: 400px;
+}
+
+.menu {
+  margin: 10px 75px 0 150px;  
+  display: grid;
+
+  grid-template-rows: 1fr;
+  grid-template-columns: 4fr 1fr;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  grid-auto-rows: 50px;
+  gap: 25px;
+}
+
+.word {
+  padding: 10px 50px;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cancel {
+  border: none;
+  background-color: white;
+
+  font-size: 20px;
+  color: #E64848;
+  text-decoration: underline;
+}
+
+.save {
+  border: none;
+
+  background-color: #86C8BC;
+  padding: 7px 20px;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 30px;
+}
+
+.defField {
+  outline: none;
+}
