@@ -1,28 +1,38 @@
 import { useState } from 'react';
 import IWord from '../interfaces/IWord';
-import styles from '../styles/wordTable.module.scss';
+import WordList from './WordList';
 import WordSidebar from './WordSidebar';
-import WordTable from './WordTable';
 
-export default function WordPanel() {
-  const [word, setWord] = useState<IWord>();
+import styles from '../styles/wordTable.module.scss';
 
-  const onChoose = (word: IWord) => {
-    setWord(word);
+interface props {
+  words: IWord[];
+}
+
+export default function WordPanel({ words }: props) {
+  const [selectedWord, setSelectedWord] = useState<IWord | undefined>(
+    undefined
+  );
+
+  const onSelect = (word: IWord) => {
+    setSelectedWord(word);
   };
 
-  const onCancel = () => {
-    setWord(undefined);
+  const onClose = () => {
+    setSelectedWord(undefined);
   };
 
   return (
     <>
-      <div className={styles.menu}>
-        <WordTable onClick={onChoose} />
-        {word ? (
+      <div className={styles.panel}>
+        <WordList
+          words={words}
+          onSelect={onSelect}
+        />
+        {selectedWord ? (
           <WordSidebar
-            onCancel={onCancel}
-            word={word}
+            onCancel={onClose}
+            word={selectedWord}
           />
         ) : null}
       </div>

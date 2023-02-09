@@ -7,12 +7,14 @@ interface User {
 
 const baseURL = 'http://localhost:3000/auth';
 
-const signUpUser = async ({ email, password }: User) => {
+export const signup = async ({ email, password }: User) => {
   const url = baseURL + '/signup';
 
   try {
     await baseApi.post(url, { email, password });
   } catch (e) {
+    console.log(e);
+
     if (e instanceof Response) {
       if (e.status === 400) {
         throw new Error('Ошибка регистрации');
@@ -41,21 +43,19 @@ const loginUser = async ({ email, password }: User) => {
   }
 };
 
-const logoutUser = async () => {
-  const url = baseURL + '/logout';
+const signout = async () => {
+  const url = baseURL + '/signout';
 
   try {
     await baseApi.get(url);
-    console.log('Fuck');
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 };
 
 const toExport = {
-  signUpUser,
   loginUser,
-  logoutUser,
+  signout,
 };
 
 export default toExport;

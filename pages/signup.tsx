@@ -1,29 +1,29 @@
 import Link from 'next/link';
 import { FormEvent, useEffect, useState } from 'react';
 import styles from '../styles/authForm.module.scss';
-import authApi from '../lib/authApi';
+import authApi, { signup } from '../lib/authApi';
 import Router from 'next/router';
 
 export default function SignUpPage() {
   const [data, setData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetch('http://localhost:3000/auth/auth', {
-        method: 'GET',
-        credentials: 'include',
-      });
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await fetch('http://localhost:3000/auth/auth', {
+  //       method: 'GET',
+  //       credentials: 'include',
+  //     });
 
-      if (data.ok) {
-        Router.push('/home');
-      }
-    };
+  //     if (data.ok) {
+  //       Router.push('/home');
+  //     }
+  //   };
 
-    fetchData();
+  //   fetchData();
 
-    return;
-  });
+  //   return;
+  // });
 
   const onEmailChange = (email: string) => {
     setData({
@@ -43,7 +43,7 @@ export default function SignUpPage() {
     e.preventDefault();
 
     try {
-      await authApi.signUpUser(data);
+      await signup(data);
       Router.push('/home');
     } catch (e) {
       if (e instanceof Error) {
@@ -76,8 +76,6 @@ export default function SignUpPage() {
         <button>Sign up</button>
       </form>
 
-      <div>{error}</div>
-
       <div className={styles.alternative}>
         <p>Have an account?</p>
         <Link
@@ -86,6 +84,8 @@ export default function SignUpPage() {
           Sign in
         </Link>
       </div>
+
+      <div className={styles.error}>{error}</div>
     </div>
   );
 }

@@ -22,26 +22,8 @@ export default function SignUpPage() {
     });
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetch('http://localhost:3000/auth/auth', {
-        method: 'GET',
-        credentials: 'include',
-      });
-
-      if (data.ok) {
-        Router.push('/home');
-      }
-    };
-
-    fetchData();
-
-    return;
-  });
-
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       await authApi.loginUser(data);
       Router.push('/home');
@@ -76,8 +58,6 @@ export default function SignUpPage() {
         <button>Login</button>
       </form>
 
-      <div>{error}</div>
-
       <div className={styles.alternative}>
         <p>Doesn`t have an account?</p>
         <Link
@@ -86,6 +66,8 @@ export default function SignUpPage() {
           Sign up
         </Link>
       </div>
+
+      <div className={styles.error}>{error}</div>
     </div>
   );
 }

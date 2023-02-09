@@ -1,4 +1,4 @@
-@import '//styles/base';
+// @import '//styles/base';
 
 $base-color: rgb(70, 116, 234, 0.71);
 
@@ -13,6 +13,7 @@ $base-color: rgb(70, 116, 234, 0.71);
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 50px;
+    margin-bottom: 20px;
   }
 
   form {
@@ -20,6 +21,7 @@ $base-color: rgb(70, 116, 234, 0.71);
     flex-direction: column;
     gap: 30px;
     width: 100%;
+    margin-bottom: 50px;
 
     input {
       border: 1px solid black;
@@ -75,4 +77,12 @@ $base-color: rgb(70, 116, 234, 0.71);
 .redirect:hover {
   color:rgb(70, 116, 234, 0.9);
   transition: color 0.2s;
+}
+
+.error {
+  margin-top: 50px;
+  color: #DC0000;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
 }

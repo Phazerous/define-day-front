@@ -1,4 +1,6 @@
 async function post(path: string, body: Record<string, string>) {
+  console.log(JSON.stringify(body));
+
   const response = await fetch(path, {
     method: 'POST',
     credentials: 'include',
@@ -8,12 +10,13 @@ async function post(path: string, body: Record<string, string>) {
     body: JSON.stringify(body),
   });
 
-  console.log(response.status);
-
   if (response.status === 200 || response.status == 201) {
-    const data = await response.json();
-    console.log(data);
-    return data;
+    const contentType = response.headers.get('content-type');
+
+    if (contentType && contentType.indexOf('application/json') !== -1) {
+      const data = await response.json();
+      return data;
+    }
   }
 
   if (!response.ok) {
@@ -27,7 +30,15 @@ async function get(path: string) {
     credentials: 'include',
   });
 
-  console.log(response);
+  if (response.status === 200) {
+    const contentType = response.headers.get('content-type');
+    console.log(contentType);
+
+    if (contentType && contentType.indexOf('application/json') !== -1) {
+      const data = await response.json();
+      return data;
+    }
+  }
 
   if (!response.ok) {
     throw response;

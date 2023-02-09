@@ -1,0 +1,30 @@
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  
+  padding: 20px 30px;
+
+  ul {
+    display: flex;
+    gap: 70px;
+
+    list-style-type: none;
+  }
+}
+
+.email {
+  font-size: 22px;
+  color: rgb(0, 0, 0, 0.7);
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+.signout {
+  font-size: 22px;
+  font-family: 'Montserrat', sans-serif;
+
+  color: #000;
+  text-decoration: underline;
+
+  cursor: pointer;
+}
