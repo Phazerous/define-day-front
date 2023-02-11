@@ -1,8 +1,8 @@
-import Word from './Word';
+import Word from '../word/Word';
 
-import styles from '../styles/wordTable.module.scss';
-import IWord from '../interfaces/IWord';
-import words from '../db/data';
+import styles from './wordTable.module.scss';
+import IWord from '../../interfaces/IWord';
+import words from '../../../db/data';
 
 interface props {
   onClick: (word: IWord) => void;

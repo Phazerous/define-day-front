@@ -1,0 +1,21 @@
+.defContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.delete {
+  margin-left: 10px;
+  height: 13px;
+  color: #DB1F1F;
+  cursor: pointer;
+}
+
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+  border: none;
+  // overflow: hidden;
+  resize: none;
+}

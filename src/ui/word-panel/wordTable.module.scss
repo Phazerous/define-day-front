@@ -1,0 +1,7 @@
+.panel {
+  margin: 10px 75px 0 150px;  
+  display: grid;
+
+  grid-template-rows: 1fr;
+  grid-template-columns: 4fr 1fr;
+}

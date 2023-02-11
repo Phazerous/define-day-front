@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import IWord from '../interfaces/IWord';
-import WordList from './WordList';
-import WordSidebar from './WordSidebar';
+import IWord from '../../interfaces/IWord';
+import WordViewSection from '../sidebar-section/WordViewSection';
+import Sidebar from '../sidebar/Sidebar';
+import WordList from '../word-list/WordList';
 
-import styles from '../styles/wordTable.module.scss';
+import styles from './wordTable.module.scss';
 
 interface props {
   words: IWord[];
@@ -29,12 +30,10 @@ export default function WordPanel({ words }: props) {
           words={words}
           onSelect={onSelect}
         />
-        {selectedWord ? (
-          <WordSidebar
-            onCancel={onClose}
-            word={selectedWord}
-          />
-        ) : null}
+
+        <Sidebar>
+          {selectedWord ? <WordViewSection word={selectedWord} /> : null}
+        </Sidebar>
       </div>
     </>
   );

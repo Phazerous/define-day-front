@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import IWord from '../interfaces/IWord';
+import IWord from '../../interfaces/IWord';
 
-import styles from '../styles/wordTable.module.scss';
+import styles from './wordTable.module.scss';
 
 interface props {
   words: IWord[];

@@ -1,4 +1,4 @@
-async function post(path: string, body: Record<string, string>) {
+export const post = async (path: string, body: Record<string, string>) => {
   console.log(JSON.stringify(body));
 
   const response = await fetch(path, {
@@ -22,9 +22,9 @@ async function post(path: string, body: Record<string, string>) {
   if (!response.ok) {
     throw response;
   }
-}
+};
 
-async function get(path: string) {
+export const get = async (path: string) => {
   const response = await fetch(path, {
     method: 'GET',
     credentials: 'include',
@@ -32,7 +32,6 @@ async function get(path: string) {
 
   if (response.status === 200) {
     const contentType = response.headers.get('content-type');
-    console.log(contentType);
 
     if (contentType && contentType.indexOf('application/json') !== -1) {
       const data = await response.json();
@@ -43,9 +42,4 @@ async function get(path: string) {
   if (!response.ok) {
     throw response;
   }
-}
-
-export default {
-  post,
-  get,
 };

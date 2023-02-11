@@ -1,0 +1,15 @@
+@import '../base.scss';
+
+.wordSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wordTitle {
+  font-size: 30px;
+}
+
+// .edit {
+//   hover:
+// }

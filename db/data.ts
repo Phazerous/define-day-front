@@ -1,4 +1,4 @@
-import IWord from '../interfaces/IWord';
+import IWord from '../src/interfaces/IWord';
 
 const words: IWord[] = [
   {
@@ -18,6 +18,7 @@ const words: IWord[] = [
       },
     ],
     id: 1,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -28,6 +29,7 @@ const words: IWord[] = [
       },
     ],
     id: 2,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -47,6 +49,7 @@ const words: IWord[] = [
       },
     ],
     id: 4,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -63,6 +66,7 @@ const words: IWord[] = [
       },
     ],
     id: 6,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -76,6 +80,7 @@ const words: IWord[] = [
       },
     ],
     id: 7,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -95,6 +100,7 @@ const words: IWord[] = [
       },
     ],
     id: 8,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -105,6 +111,7 @@ const words: IWord[] = [
       },
     ],
     id: 9,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -124,6 +131,7 @@ const words: IWord[] = [
       },
     ],
     id: 10,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -140,6 +148,7 @@ const words: IWord[] = [
       },
     ],
     id: 11,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 
   {
@@ -153,6 +162,7 @@ const words: IWord[] = [
       },
     ],
     id: 12,
+    dateOfStudy: new Date(Date.UTC(2022, 12, 24)),
   },
 ];
 
