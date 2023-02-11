@@ -1,5 +1,5 @@
 export default interface IDef {
   text: string;
-  id?: string;
+  id: number;
   isNew?: boolean;
 }

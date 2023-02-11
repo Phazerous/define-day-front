@@ -1,22 +1,24 @@
-// TO UNIFY
-
-interface defProps {
-  text: string;
-  order: number;
-}
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './definition-editable.module.scss';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
-export default function DefinitionEditable({ text, order }: defProps) {
+interface defProps {
+  text: string;
+  order: number;
+  onDefChange: (newText: string) => void;
+}
+
+export default function DefinitionEditable({
+  text,
+  order,
+  onDefChange,
+}: defProps) {
   const [isEditing, setEditing] = useState<boolean>(false);
-  const [def, setDef] = useState<string>(text);
 
   const onTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setDef(e.target.value);
+    onDefChange(e.target.value);
 
     e.target.style.height = 'auto';
 
@@ -34,14 +36,12 @@ export default function DefinitionEditable({ text, order }: defProps) {
           {isEditing ? (
             <textarea
               className={styles.textarea}
-              value={def}
+              value={text}
               onChange={onTextChange}
-              style={{ height: '60px' }}>
-              {def}
-            </textarea>
+              style={{ height: '60px' }}></textarea>
           ) : (
             <>
-              {def}
+              {text}
               <FontAwesomeIcon
                 icon={faTimes}
                 className={styles.delete}
