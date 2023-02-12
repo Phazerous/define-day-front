@@ -1,0 +1,17 @@
+@import '../base.scss';
+
+.wordAddSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.add {
+  border: none;
+  padding: 15px 40px;
+  color: #fff;
+  background-color: $base-color;
+  border-radius: 15px;
+  font-size: 25px;
+}

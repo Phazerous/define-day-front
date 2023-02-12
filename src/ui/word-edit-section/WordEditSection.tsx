@@ -6,20 +6,24 @@ import SidebarEditActions from '../sidebar-actions/sidebar-edit-actions';
 import styles from './word-edit-section.module.scss';
 
 interface sectionProps {
-  passedWord: IWord;
+  word: IWord | INewWord;
   onCancel: () => void;
 }
 
 import { nanoid } from 'nanoid';
+import INewDef from '../../interfaces/INewDef';
+import INewWord from '../../interfaces/INewWord';
+import { formatNewWord, formatUpdatedWord } from '../../lib/formatter';
 
-export default function WordEditSection({
-  passedWord,
-  onCancel,
-}: sectionProps) {
-  const [title, setTitle] = useState<string>(passedWord.title);
-  const [defs, setDefs] = useState<IDef[]>(passedWord.defs || []);
+export default function WordEditSection({ word, onCancel }: sectionProps) {
+  const [title, setTitle] = useState<string>(word.title);
+  const [defs, setDefs] = useState<IDef[]>(
+    JSON.parse(JSON.stringify(word.defs)) || []
+  ); // DEEP COPY
+  const [newDefs, setNewDefs] = useState<INewDef[]>([]);
 
-  const [bad, setBad] = useState<string>(JSON.stringify(JSON.stringify(defs))); // TO BE DELETED!!!!
+  const [bad, setBad] = useState<string>(JSON.stringify(defs)); // TO BE DELETED!!!!
+  const [bad2, setBad2] = useState<string>(JSON.stringify(newDefs)); // TO BE DELETED!!!!
 
   const onDefChange = (id: number | string, newText: string) => {
     const prevDef = defs.find((def) => def.id === id) as IDef;
@@ -39,20 +43,50 @@ export default function WordEditSection({
     setBad(JSON.stringify(defs));
   };
 
-  const onDefCreate = () => {
-    setDefs([
-      ...defs,
+  const onNewDefCreate = () => {
+    const updatedDefs = [
+      ...newDefs,
       {
         text: '',
         id: nanoid(),
-        isNew: true,
       },
-    ]);
+    ];
+
+    setNewDefs(updatedDefs);
     setBad(JSON.stringify(defs));
   };
 
+  const onNewDefChange = (id: string, newText: string) => {
+    const prevDef = newDefs.find((def) => def.id === id) as INewDef;
+    prevDef.text = newText;
+
+    setNewDefs(newDefs);
+    setBad(JSON.stringify(newDefs));
+  };
+
+  const onNewDefDelete = (id: string) => {
+    const prevDef = newDefs.find((def) => def.id === id) as INewDef;
+
+    const indexOfPrevDef = newDefs.indexOf(prevDef);
+    newDefs.splice(indexOfPrevDef, 1);
+
+    setNewDefs(newDefs);
+    setBad2(JSON.stringify(newDefs));
+  };
+
   const onSave = () => {
-    console.log('Saved');
+    let formattedWord: any;
+
+    if ('id' in word) updateWord(word.id);
+    else createWord();
+  };
+
+  const updateWord = (id: number) => {
+    const formattedWord = formatUpdatedWord(id, title, defs, newDefs);
+  };
+
+  const createWord = () => {
+    const formattedWord = formatNewWord(title, newDefs);
   };
 
   return (
@@ -63,7 +97,10 @@ export default function WordEditSection({
           defs={defs}
           onDefChange={onDefChange}
           onDelete={onDefDelete}
-          onCreate={onDefCreate}
+          newDefs={newDefs}
+          onNewDefCreate={onNewDefCreate}
+          onNewDefChange={onNewDefChange}
+          onNewDefDelete={onNewDefDelete}
         />
 
         <SidebarEditActions

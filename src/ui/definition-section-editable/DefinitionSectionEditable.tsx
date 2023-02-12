@@ -1,19 +1,27 @@
 import IDef from '../../interfaces/IDef';
+import INewDef from '../../interfaces/INewDef';
 import DefinitionEditable from '../definition-editable/definition-editable';
 import styles from './definition-section-editable.module.scss';
 
 interface sectionProps {
   defs: IDef[];
-  onDefChange: (id: number | string, newText: string) => void;
-  onDelete: (id: number | string) => void;
-  onCreate: () => void;
+  onDefChange: (id: number, newText: string) => void;
+  onDelete: (id: number) => void;
+
+  newDefs: INewDef[];
+  onNewDefCreate: () => void;
+  onNewDefChange: (id: string, newText: string) => void;
+  onNewDefDelete: (id: string) => void;
 }
 
 export default function DefinitionSectionEditable({
   defs,
+  newDefs,
   onDefChange,
   onDelete,
-  onCreate,
+  onNewDefCreate,
+  onNewDefChange,
+  onNewDefDelete,
 }: sectionProps) {
   return (
     <>
@@ -28,9 +36,19 @@ export default function DefinitionSectionEditable({
           />
         ))}
 
+        {newDefs.map((def, idx) => (
+          <DefinitionEditable
+            onDefChange={(newText: string) => onNewDefChange(def.id, newText)}
+            onDelete={() => onNewDefDelete(def.id)}
+            key={def.id}
+            text={def.text}
+            order={defs.length + idx + 1}
+          />
+        ))}
+
         <button
           className={styles.add}
-          onClick={onCreate}>
+          onClick={onNewDefCreate}>
           Add
         </button>
       </div>
