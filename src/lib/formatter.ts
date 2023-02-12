@@ -1,7 +1,9 @@
 import IDef from '../interfaces/IDef';
 import INewDef from '../interfaces/INewDef';
 
-export const convertDateToString = (date: Date) => {
+export const convertDatestringToString = (dateString: string) => {
+  const date = new Date(Date.parse(dateString));
+
   const months = [
     'Jan',
     'Feb',
@@ -31,7 +33,7 @@ export const formatUpdatedWord = (
   const updatedWord = {
     id: wordId,
     title: wordTitle,
-    defs: [
+    definitions: [
       ...defs,
       ...newDefs.map((def) => {
         return { text: def.text };
@@ -45,9 +47,9 @@ export const formatUpdatedWord = (
 export const formatNewWord = (wordTitle: string, newDefs: INewDef[]) => {
   const newWord = {
     title: wordTitle,
-    defs: [
+    definitions: [
       ...newDefs.map((def) => {
-        return { text: def.text };
+        return def.text;
       }),
     ],
   };

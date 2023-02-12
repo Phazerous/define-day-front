@@ -27,7 +27,7 @@ export const signup = async ({ email, password }: User) => {
   }
 };
 
-const loginUser = async ({ email, password }: User) => {
+export const loginUser = async ({ email, password }: User) => {
   const url = baseURL + '/login';
 
   try {
@@ -43,7 +43,7 @@ const loginUser = async ({ email, password }: User) => {
   }
 };
 
-const signout = async () => {
+export const signout = async () => {
   const url = baseURL + '/signout';
 
   try {
@@ -52,10 +52,3 @@ const signout = async () => {
     throw e;
   }
 };
-
-const toExport = {
-  loginUser,
-  signout,
-};
-
-export default toExport;

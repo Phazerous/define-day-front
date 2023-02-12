@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
 import styles from '../../styles/authForm.module.scss';
-import authApi from '../lib/authApi';
+import { loginUser } from '../lib/authApi';
 
 export default function SignUpPage() {
   const [data, setData] = useState({ email: '', password: '' });
@@ -24,8 +24,11 @@ export default function SignUpPage() {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    console.log(data);
+
     try {
-      await authApi.loginUser(data);
+      await loginUser(data);
       Router.push('/home');
     } catch (e) {
       if (e instanceof Error) {

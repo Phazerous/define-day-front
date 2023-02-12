@@ -6,14 +6,20 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 interface actionsProps {
   onCancel: () => void;
   onSave: () => void;
+  onDelete: () => void;
 }
 
-export default function SidebarEditActions({ onCancel, onSave }: actionsProps) {
+export default function SidebarEditActions({
+  onCancel,
+  onSave,
+  onDelete,
+}: actionsProps) {
   return (
     <>
       <div className={styles.actions}>
         <div className={styles.trashWrapper}>
           <FontAwesomeIcon
+            onClick={onDelete}
             className={styles.trash}
             icon={faTrash}
           />

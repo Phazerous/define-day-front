@@ -1,4 +1,4 @@
-import { convertDateToString } from '../../lib/formatter';
+import { convertDatestringToString } from '../../lib/formatter';
 import DefinitionSection from '../definition-section/defition-section';
 import SidebarViewActions from '../sidebar-actions/sidebar-view-actions';
 import IWord from '../../interfaces/IWord';
@@ -11,13 +11,13 @@ interface sectionProps {
 }
 
 export default function WordViewSection({ word, setEditable }: sectionProps) {
-  const dateOfStudy = convertDateToString(word.dateOfStudy);
+  const dateOfStudy = convertDatestringToString(word.created_at);
 
   return (
     <div className={styles.wordViewSection}>
       <h2 className={styles.wordTitle}>{word.title}</h2>
 
-      <DefinitionSection defs={word.defs} />
+      <DefinitionSection defs={word.definitions} />
 
       <SidebarViewActions
         dateOfStudy={dateOfStudy}

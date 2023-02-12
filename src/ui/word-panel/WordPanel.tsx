@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import INewWord from '../../interfaces/INewWord';
 import IWord from '../../interfaces/IWord';
+import { deleteWord } from '../../lib/wordApi';
 import Sidebar from '../sidebar/Sidebar';
 import WordAddSection from '../word-add-section/WordAddSection';
 import WordEditSection from '../word-edit-section/WordEditSection';
@@ -11,9 +12,10 @@ import styles from './word-panel.module.scss';
 
 interface props {
   words: IWord[];
+  onUpdate: () => void;
 }
 
-export default function WordPanel({ words }: props) {
+export default function WordPanel({ words, onUpdate }: props) {
   const [selectedWord, setSelectedWord] = useState<IWord | undefined>(
     undefined
   );
@@ -26,6 +28,14 @@ export default function WordPanel({ words }: props) {
     setSelectedWord(word);
   };
 
+  const onWordDelete = async (id: number) => {
+    try {
+      await deleteWord(id);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const onClose = () => {
     setSelectedWord(undefined);
   };
@@ -34,7 +44,8 @@ export default function WordPanel({ words }: props) {
     if (selectedWord && isEditing) {
       return (
         <WordEditSection
-          passedWord={selectedWord}
+          onUpdate={() => onUpdate()}
+          word={selectedWord}
           onCancel={() => setEditing(false)}
         />
       );
@@ -52,6 +63,7 @@ export default function WordPanel({ words }: props) {
     if (newWord) {
       return (
         <WordEditSection
+          onUpdate={() => onUpdate()}
           word={newWord}
           onCancel={() => setNewWord(undefined)}
         />
@@ -63,7 +75,7 @@ export default function WordPanel({ words }: props) {
         onAdd={() =>
           setNewWord({
             title: '',
-            defs: [],
+            definitions: [],
           })
         }
       />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import IDef from '../../interfaces/IDef';
 import IWord from '../../interfaces/IWord';
 import DefinitionSectionEditable from '../definition-section-editable/DefinitionSectionEditable';
@@ -8,17 +8,23 @@ import styles from './word-edit-section.module.scss';
 interface sectionProps {
   word: IWord | INewWord;
   onCancel: () => void;
+  onUpdate: () => void;
 }
 
 import { nanoid } from 'nanoid';
 import INewDef from '../../interfaces/INewDef';
 import INewWord from '../../interfaces/INewWord';
 import { formatNewWord, formatUpdatedWord } from '../../lib/formatter';
+import { createNewWord, deleteWord, updateWord } from '../../lib/wordApi';
 
-export default function WordEditSection({ word, onCancel }: sectionProps) {
+export default function WordEditSection({
+  word,
+  onCancel,
+  onUpdate,
+}: sectionProps) {
   const [title, setTitle] = useState<string>(word.title);
   const [defs, setDefs] = useState<IDef[]>(
-    JSON.parse(JSON.stringify(word.defs)) || []
+    JSON.parse(JSON.stringify(word.definitions)) || []
   ); // DEEP COPY
   const [newDefs, setNewDefs] = useState<INewDef[]>([]);
 
@@ -77,22 +83,55 @@ export default function WordEditSection({ word, onCancel }: sectionProps) {
   const onSave = () => {
     let formattedWord: any;
 
-    if ('id' in word) updateWord(word.id);
+    if ('id' in word) onUpdateWord(word.id);
     else createWord();
+
+    onUpdate();
   };
 
-  const updateWord = (id: number) => {
+  const onUpdateWord = async (id: number) => {
     const formattedWord = formatUpdatedWord(id, title, defs, newDefs);
+
+    try {
+      await updateWord(formattedWord);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const createWord = () => {
+  const onWordDelete = async (id: number) => {
+    if (id === 0) return;
+
+    try {
+      await deleteWord(id);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const createWord = async () => {
     const formattedWord = formatNewWord(title, newDefs);
+
+    try {
+      await createNewWord(formattedWord);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <>
       <div className={styles.wordEditSection}>
-        <div className={styles.wordTitle}>{title}</div>
+        {/* <div className={styles.wordTitle} contentEditable={true}{title}</div> */}
+        <input
+          type='text'
+          className={styles.wordTitle}
+          value={title}
+          placeholder='Word'
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setTitle(e.target.value)
+          }
+        />
         <DefinitionSectionEditable
           defs={defs}
           onDefChange={onDefChange}
@@ -104,6 +143,7 @@ export default function WordEditSection({ word, onCancel }: sectionProps) {
         />
 
         <SidebarEditActions
+          onDelete={() => onWordDelete('id' in word ? word.id : 0)}
           onCancel={() => onCancel()}
           onSave={onSave}
         />
