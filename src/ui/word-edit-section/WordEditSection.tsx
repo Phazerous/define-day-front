@@ -10,6 +10,8 @@ interface sectionProps {
   onCancel: () => void;
 }
 
+import { nanoid } from 'nanoid';
+
 export default function WordEditSection({
   passedWord,
   onCancel,
@@ -19,7 +21,7 @@ export default function WordEditSection({
 
   const [bad, setBad] = useState<string>(JSON.stringify(JSON.stringify(defs))); // TO BE DELETED!!!!
 
-  const onDefChange = (id: number, newText: string) => {
+  const onDefChange = (id: number | string, newText: string) => {
     const prevDef = defs.find((def) => def.id === id) as IDef;
     prevDef.text = newText;
 
@@ -27,16 +29,47 @@ export default function WordEditSection({
     setBad(JSON.stringify(defs));
   };
 
+  const onDefDelete = (id: number | string) => {
+    const prevDef = defs.find((def) => def.id === id) as IDef;
+
+    const indexOfPrevDef = defs.indexOf(prevDef);
+    defs.splice(indexOfPrevDef, 1);
+
+    setDefs(defs);
+    setBad(JSON.stringify(defs));
+  };
+
+  const onDefCreate = () => {
+    setDefs([
+      ...defs,
+      {
+        text: '',
+        id: nanoid(),
+        isNew: true,
+      },
+    ]);
+    setBad(JSON.stringify(defs));
+  };
+
+  const onSave = () => {
+    console.log('Saved');
+  };
+
   return (
     <>
       <div className={styles.wordEditSection}>
-        <div className={styles.title}>{title}</div>
+        <div className={styles.wordTitle}>{title}</div>
         <DefinitionSectionEditable
           defs={defs}
           onDefChange={onDefChange}
+          onDelete={onDefDelete}
+          onCreate={onDefCreate}
         />
-        {/* TO DO: CHANGE ON CANCEL */}
-        <SidebarEditActions onCancel={() => {}} /> {}
+
+        <SidebarEditActions
+          onCancel={() => onCancel()}
+          onSave={onSave}
+        />
       </div>
     </>
   );

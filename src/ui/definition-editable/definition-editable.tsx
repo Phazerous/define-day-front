@@ -2,18 +2,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './definition-editable.module.scss';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface defProps {
   text: string;
   order: number;
   onDefChange: (newText: string) => void;
+  onDelete: () => void;
 }
 
 export default function DefinitionEditable({
   text,
   order,
   onDefChange,
+  onDelete,
 }: defProps) {
   const [isEditing, setEditing] = useState<boolean>(false);
 
@@ -38,6 +40,7 @@ export default function DefinitionEditable({
               className={styles.textarea}
               value={text}
               onChange={onTextChange}
+              placeholder={`Def ${order}`}
               style={{ height: '60px' }}></textarea>
           ) : (
             <>
@@ -45,6 +48,7 @@ export default function DefinitionEditable({
               <FontAwesomeIcon
                 icon={faTimes}
                 className={styles.delete}
+                onClick={onDelete}
               />
             </>
           )}

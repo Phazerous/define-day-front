@@ -5,9 +5,10 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface actionsProps {
   onCancel: () => void;
+  onSave: () => void;
 }
 
-export default function SidebarEditActions({ onCancel }: actionsProps) {
+export default function SidebarEditActions({ onCancel, onSave }: actionsProps) {
   return (
     <>
       <div className={styles.actions}>
@@ -23,7 +24,11 @@ export default function SidebarEditActions({ onCancel }: actionsProps) {
             onClick={onCancel}>
             Cancel
           </div>
-          <div className={styles.save}>Save</div>
+          <div
+            className={styles.save}
+            onClick={onSave}>
+            Save
+          </div>
         </div>
       </div>
     </>

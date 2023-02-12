@@ -2,13 +2,16 @@ import styles from './sidebar-actions.module.scss';
 
 interface viewProps {
   dateOfStudy: string;
-  onEdit: () => void;
+  setEditable: () => void;
 }
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
-export default function SidebarViewActions({ dateOfStudy, onEdit }: viewProps) {
+export default function SidebarViewActions({
+  dateOfStudy,
+  setEditable,
+}: viewProps) {
   return (
     <>
       <div className={styles.actions}>
@@ -24,7 +27,7 @@ export default function SidebarViewActions({ dateOfStudy, onEdit }: viewProps) {
             <FontAwesomeIcon
               className={styles.edit}
               icon={faPenToSquare}
-              onClick={onEdit}
+              onClick={setEditable}
             />
           </div>
         </div>

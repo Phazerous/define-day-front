@@ -1,0 +1,26 @@
+.defList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add {
+  font-size: 16px;
+  padding: 5px 25px;
+  background-color: #F1F1F1;
+  color: #B9B9B9;
+  border: none;
+  border-radius: 10px;
+  margin-left: 15px;
+
+  align-self: flex-start;
+
+  transition: all .3s;
+}
+
+.add:hover {
+  background-color: #C9C9C9;
+  color: #1F1F1F;
+
+  transition: all .3s;
+}
